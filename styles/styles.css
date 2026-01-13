@@ -50,6 +50,17 @@ h1 {
   color: #3a2419;
 }
 
+#main-error {
+  display: none;
+  margin-bottom: 1rem;
+  padding: 0.5rem 0;
+  padding-left: 0.5rem;
+  color: white;
+  background-color: rgb(255, 59, 59);
+  font-weight: 600;
+  border-radius: 0.3rem;
+}
+
 .error {
   color: rgb(211, 1, 1);
   font-size: 0.813rem;
@@ -72,6 +83,37 @@ input {
 
 input::placeholder {
   color: #4e332699;
+}
+
+#password-input-wrapper-signup {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+#password-signup {
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.password-show {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translate(0%, -50%);
+  background: none;
+  border: none;
+  color: grey;
+  cursor: pointer;
+}
+
+#confirm-password-input-wrapper-signup {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+#confirm-password-signup {
+  width: 100%;
+  margin-bottom: 0;
 }
 
 button[type="submit"] {

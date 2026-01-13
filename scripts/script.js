@@ -1,22 +1,40 @@
 const inputs = document.querySelectorAll("input");
-const nameError = document.getElementById("name-error");
-const emailError = document.getElementById("email-error");
-const phoneError = document.getElementById("phone-error");
-const cityError = document.getElementById("city-error");
-const passwordError = document.getElementById("password-error");
-const confirmPasswordError = document.getElementById("confirm-password-error");
+const nameError = document.getElementById("name-error-signup");
+const emailErrorSignup = document.getElementById("email-error-signup");
+const phoneError = document.getElementById("phone-error-signup");
+const cityError = document.getElementById("city-error-signup");
+const passwordErrorSignup = document.getElementById("password-error-signup");
+const confirmPasswordError = document.getElementById(
+  "confirm-password-error-signup"
+);
+const passwordShowSignup = document.getElementById("password-show-signup");
+const passwordShowIconSignup = document.querySelector(
+  "#password-show-signup i"
+);
+const confirmPasswordShow = document.getElementById(
+  "confirm-password-show-signup"
+);
+const confirmPasswordShowIcon = document.querySelector(
+  "#confirm-password-show-signup i"
+);
+const passwordInputFieldSignup = document.getElementById("password-signup");
+const confirmPasswordInputField = document.getElementById(
+  "confirm-password-signup"
+);
+const mainErrorSignup = document.getElementById("main-error");
 const signupForm = document.getElementById("form-signup");
 
 let nameInput;
-let emailInput;
+let emailInputSignup;
 let phoneInput;
 let cityNameInput;
-let passwordInput;
+let passwordInputSignup;
 let confirmPasswordInput;
 
 function nameValidation(e) {
   if (!e.target.value.trim()) {
     nameError.textContent = "This field cannot be empty";
+    nameInput = "";
     return;
   }
   nameError.textContent = "";
@@ -25,18 +43,20 @@ function nameValidation(e) {
 
 function emailValidation(e) {
   if (!e.target.value.trim()) {
-    emailError.textContent = "This field cannot be empty";
+    emailErrorSignup.textContent = "This field cannot be empty";
+    emailInputSignup = "";
     return;
   }
 
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   if (!emailRegex.test(e.target.value)) {
-    emailError.textContent = "Please enter a valid email";
+    emailErrorSignup.textContent = "Please enter a valid email";
+    emailInputSignup = "";
     return;
   }
-  emailError.textContent = "";
-  emailInput = e.target.value.trim();
+  emailErrorSignup.textContent = "";
+  emailInputSignup = e.target.value.trim();
 }
 
 function phoneValidation(input, e) {
@@ -45,6 +65,7 @@ function phoneValidation(input, e) {
 
   if (!numberInput.trim()) {
     phoneError.textContent = "This field cannot be empty";
+    phoneInput = "";
     return;
   }
 
@@ -64,17 +85,19 @@ function cityValidation(input, e) {
 
   if (!cityInput.trim()) {
     cityError.textContent = "This field cannot be empty";
+    cityNameInput = "";
     return;
   }
   cityError.textContent = "";
-  cityNameInput = cityInput;
+  cityNameInput = cityInput.trim();
 }
 
 function passwordValidation(e) {
   const password = e.target.value.trim();
 
   if (!password) {
-    passwordError.textContent = "This field cannot be empty";
+    passwordErrorSignup.textContent = "This field cannot be empty";
+    passwordInputSignup = "";
     return;
   }
 
@@ -89,31 +112,39 @@ function passwordValidation(e) {
   if (!hasNumber) messages.push("a number");
 
   if (messages.length === 0) {
-    passwordError.textContent = "";
-    passwordInput = password;
+    passwordErrorSignup.textContent = "";
+    passwordInputSignup = password;
   } else {
-    passwordError.textContent = "Password must contain " + messages.join(", ");
+    passwordErrorSignup.textContent =
+      "Password must contain " + messages.join(", ");
+    passwordInputSignup = "";
   }
 
-  if (passwordInput === confirmPasswordInput) {
+  if (passwordInputSignup === confirmPasswordInput) {
     confirmPasswordError.textContent = "";
   }
-  console.log(passwordInput);
+  console.log(passwordInputSignup);
 }
 
 function confirmPasswordValidation(e) {
   if (!e.target.value.trim()) {
     confirmPasswordError.textContent = "This field cannot be empty";
+    confirmPasswordInput = "";
     return;
   }
 
-  if (e.target.value.trim() !== passwordInput) {
+  if (!passwordInputSignup) {
+    return;
+  }
+
+  if (e.target.value.trim() !== passwordInputSignup) {
     confirmPasswordError.textContent = "Passwords do not match";
+    confirmPasswordInput = "";
     return;
   }
   confirmPasswordError.textContent = "";
   confirmPasswordInput = e.target.value.trim();
-  console.log(e.target.value.trim(), passwordInput);
+  console.log(e.target.value.trim(), passwordInputSignup);
 }
 
 inputs.forEach((input) => {
@@ -141,29 +172,56 @@ inputs.forEach((input) => {
   });
 });
 
+passwordShowSignup.addEventListener("click", () => {
+  if (passwordInputFieldSignup.type === "password") {
+    passwordInputFieldSignup.type = "text";
+    passwordShowIconSignup.classList.remove("fa-eye");
+    passwordShowIconSignup.classList.add("fa-eye-slash");
+    console.log(passwordShowIconSignup);
+  } else {
+    passwordInputFieldSignup.type = "password";
+    passwordShowIconSignup.classList.remove("fa-eye-slash");
+    passwordShowIconSignup.classList.add("fa-eye");
+  }
+});
+
+confirmPasswordShow.addEventListener("click", () => {
+  if (confirmPasswordInputField.type === "password") {
+    confirmPasswordInputField.type = "text";
+    confirmPasswordShowIcon.classList.remove("fa-eye");
+    confirmPasswordShowIcon.classList.add("fa-eye-slash");
+  } else {
+    confirmPasswordInputField.type = "password";
+    confirmPasswordShowIcon.classList.remove("fa-eye-slash");
+    confirmPasswordShowIcon.classList.add("fa-eye");
+  }
+});
+
 signupForm.addEventListener("submit", (e) => {
   e.preventDefault();
   if (
     nameInput &&
-    emailInput &&
+    emailInputSignup &&
     phoneInput &&
     cityNameInput &&
-    passwordInput &&
+    passwordInputSignup &&
     confirmPasswordInput
   ) {
     alert("Signup Successful! Your new Account has been created.");
 
     const userData = {
       name: nameInput,
-      email: emailInput,
+      email: emailInputSignup,
       phone: phoneInput,
       city: cityNameInput,
-      password: passwordInput,
+      password: passwordInputSignup,
     };
     localStorage.setItem("user", JSON.stringify(userData));
 
     window.location.href = "SignIn.html";
   } else {
-    alert("Something went wrong. Please recheck the fields with errors");
+    mainErrorSignup.style.display = "block";
+    mainErrorSignup.textContent =
+      "Something went wrong. Please recheck the fields with errors";
   }
 });

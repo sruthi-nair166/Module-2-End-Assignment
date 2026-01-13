@@ -4,15 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign Up</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    />
     <link rel="stylesheet" href="./styles/styles.css" />
   </head>
   <body>
     <main>
-      <form id="form-signup">
+      <form id="form-signup" novalidate>
         <h1>SIGN UP</h1>
 
+        <p id="main-error" class="error"></p>
+
         <label for="full-name-signup">Full Name</label>
-        <p id="name-error" class="error"></p>
+        <p id="name-error-signup" class="error"></p>
         <input
           type="text"
           id="full-name-signup"
@@ -21,7 +27,7 @@
         />
 
         <label for="email-signup">Email ID</label>
-        <p id="email-error" class="error"></p>
+        <p id="email-error-signup" class="error"></p>
         <input
           type="email"
           id="email-signup"
@@ -30,7 +36,7 @@
         />
 
         <label for="phone-signup">Phone Number</label>
-        <p id="phone-error" class="error"></p>
+        <p id="phone-error-signup" class="error"></p>
         <input
           type="text"
           id="phone-signup"
@@ -39,7 +45,7 @@
         />
 
         <label for="city-signup">City Name</label>
-        <p id="city-error" class="error"></p>
+        <p id="city-error-signup" class="error"></p>
         <input
           type="text"
           id="city-signup"
@@ -48,22 +54,37 @@
         />
 
         <label for="password-signup">Password</label>
-        <p id="password-error" class="error"></p>
-        <input
-          type="password"
-          id="password-signup"
-          placeholder="Enter your password"
-          required
-        />
+        <p id="password-error-signup" class="error"></p>
+        <div id="password-input-wrapper-signup">
+          <input
+            type="password"
+            id="password-signup"
+            placeholder="Enter your password"
+            required
+          />
+          <button type="button" id="password-show-signup" class="password-show">
+            <i class="fa-solid fa-eye"></i>
+          </button>
+        </div>
 
         <label for="confirm-password-signup">Confirm Password</label>
-        <p id="confirm-password-error" class="error"></p>
-        <input
-          type="password"
-          id="confirm-password-signup"
-          placeholder="Enter your password again"
-          required
-        />
+        <p id="confirm-password-error-signup" class="error"></p>
+        <div id="confirm-password-input-wrapper-signup">
+          <input
+            type="password"
+            id="confirm-password-signup"
+            placeholder="Enter your password again"
+            required
+          />
+          <button
+            type="button"
+            id="confirm-password-show-signup"
+            class="password-show"
+          >
+            <i class="fa-solid fa-eye"></i>
+          </button>
+        </div>
+
         <button type="submit">Submit</button>
 
         <p class="auth-switch">
