@@ -31,18 +31,18 @@ let cityNameInput;
 let passwordInputSignup;
 let confirmPasswordInput;
 
-function nameValidation(e) {
-  if (!e.target.value.trim()) {
+function nameValidation(input) {
+  if (!input.value.trim()) {
     nameError.textContent = "This field cannot be empty";
     nameInput = "";
     return;
   }
   nameError.textContent = "";
-  nameInput = e.target.value.trim();
+  nameInput = input.value.trim();
 }
 
-function emailValidation(e) {
-  if (!e.target.value.trim()) {
+function emailValidation(input) {
+  if (!input.value.trim()) {
     emailErrorSignup.textContent = "This field cannot be empty";
     emailInputSignup = "";
     return;
@@ -50,17 +50,17 @@ function emailValidation(e) {
 
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-  if (!emailRegex.test(e.target.value)) {
+  if (!emailRegex.test(input.value)) {
     emailErrorSignup.textContent = "Please enter a valid email";
     emailInputSignup = "";
     return;
   }
   emailErrorSignup.textContent = "";
-  emailInputSignup = e.target.value.trim();
+  emailInputSignup = input.value.trim();
 }
 
-function phoneValidation(input, e) {
-  const numberInput = e.target.value.replace(/\D/g, "");
+function phoneValidation(input) {
+  const numberInput = input.value.replace(/\D/g, "");
   input.value = numberInput;
 
   if (!numberInput.trim()) {
@@ -69,7 +69,7 @@ function phoneValidation(input, e) {
     return;
   }
 
-  if (e.target.value.length <= 10) {
+  if (input.value.length <= 10) {
     phoneError.textContent = "";
     phoneInput = numberInput;
   } else {
@@ -79,8 +79,8 @@ function phoneValidation(input, e) {
   }
 }
 
-function cityValidation(input, e) {
-  const cityInput = e.target.value.replace(/[^A-Za-z\s]/g, "");
+function cityValidation(input) {
+  const cityInput = input.value.replace(/[^A-Za-z\s]/g, "");
   input.value = cityInput;
 
   if (!cityInput.trim()) {
@@ -92,8 +92,8 @@ function cityValidation(input, e) {
   cityNameInput = cityInput.trim();
 }
 
-function passwordValidation(e) {
-  const password = e.target.value.trim();
+function passwordValidation(input) {
+  const password = input.value.trim();
 
   if (!password) {
     passwordErrorSignup.textContent = "This field cannot be empty";
@@ -122,51 +122,52 @@ function passwordValidation(e) {
 
   if (passwordInputSignup === confirmPasswordInput) {
     confirmPasswordError.textContent = "";
+  } else {
+    confirmPasswordError.textContent = "Passwords do not match";
   }
-  console.log(passwordInputSignup);
 }
 
-function confirmPasswordValidation(e) {
-  if (!e.target.value.trim()) {
+function confirmPasswordValidation(input) {
+  if (!input.value.trim()) {
     confirmPasswordError.textContent = "This field cannot be empty";
     confirmPasswordInput = "";
     return;
   }
 
   if (!passwordInputSignup) {
+    confirmPasswordError.textContent = "";
     return;
   }
 
-  if (e.target.value.trim() !== passwordInputSignup) {
+  if (input.value.trim() !== passwordInputSignup) {
     confirmPasswordError.textContent = "Passwords do not match";
     confirmPasswordInput = "";
     return;
   }
   confirmPasswordError.textContent = "";
-  confirmPasswordInput = e.target.value.trim();
-  console.log(e.target.value.trim(), passwordInputSignup);
+  confirmPasswordInput = input.value.trim();
 }
 
 inputs.forEach((input) => {
   input.addEventListener("input", (e) => {
     switch (input.id) {
       case "full-name-signup":
-        nameValidation(e);
+        nameValidation(input);
         break;
       case "email-signup":
-        emailValidation(e);
+        emailValidation(input);
         break;
       case "phone-signup":
-        phoneValidation(input, e);
+        phoneValidation(input);
         break;
       case "city-signup":
-        cityValidation(input, e);
+        cityValidation(input);
         break;
       case "password-signup":
-        passwordValidation(e);
+        passwordValidation(input);
         break;
       case "confirm-password-signup":
-        confirmPasswordValidation(e);
+        confirmPasswordValidation(input);
         break;
     }
   });
@@ -177,7 +178,6 @@ passwordShowSignup.addEventListener("click", () => {
     passwordInputFieldSignup.type = "text";
     passwordShowIconSignup.classList.remove("fa-eye");
     passwordShowIconSignup.classList.add("fa-eye-slash");
-    console.log(passwordShowIconSignup);
   } else {
     passwordInputFieldSignup.type = "password";
     passwordShowIconSignup.classList.remove("fa-eye-slash");
@@ -223,5 +223,17 @@ signupForm.addEventListener("submit", (e) => {
     mainErrorSignup.style.display = "block";
     mainErrorSignup.textContent =
       "Something went wrong. Please recheck the fields with errors";
+
+    const nameInputField = document.getElementById("full-name-signup");
+    const emailInputFieldSignup = document.getElementById("email-signup");
+    const phoneInputField = document.getElementById("phone-signup");
+    const cityInputField = document.getElementById("city-signup");
+
+    nameValidation(nameInputField);
+    emailValidation(emailInputFieldSignup);
+    phoneValidation(phoneInputField);
+    cityValidation(cityInputField);
+    passwordValidation(passwordInputFieldSignup);
+    confirmPasswordValidation(confirmPasswordInputField);
   }
 });
