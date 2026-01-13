@@ -39,8 +39,8 @@ form {
   position: relative;
   z-index: 1;
   height: 80%;
-  max-width: 500px;
-  width: min(90%, 500px);
+  max-width: 510px;
+  width: min(90%, 510px);
   padding: clamp(1.5rem, 6vw, 3rem);
 }
 
@@ -50,14 +50,14 @@ h1 {
   color: #3a2419;
 }
 
-#main-error {
+.main-error {
   display: none;
   margin-bottom: 1rem;
-  padding: 0.5rem 0;
-  padding-left: 0.5rem;
+  padding: 0.5rem;
   color: white;
   background-color: rgb(255, 59, 59);
   font-weight: 600;
+  font-size: 0.813rem;
   border-radius: 0.3rem;
 }
 
@@ -85,12 +85,16 @@ input::placeholder {
   color: #4e332699;
 }
 
-#password-input-wrapper-signup {
+#password-input-wrapper-signup,
+#confirm-password-input-wrapper-signup,
+#password-input-wrapper-signin {
   position: relative;
   margin-bottom: 1rem;
 }
 
-#password-signup {
+#password-signup,
+#confirm-password-signup,
+#password-signin {
   width: 100%;
   margin-bottom: 0;
 }
@@ -104,16 +108,6 @@ input::placeholder {
   border: none;
   color: grey;
   cursor: pointer;
-}
-
-#confirm-password-input-wrapper-signup {
-  position: relative;
-  margin-bottom: 1rem;
-}
-
-#confirm-password-signup {
-  width: 100%;
-  margin-bottom: 0;
 }
 
 button[type="submit"] {

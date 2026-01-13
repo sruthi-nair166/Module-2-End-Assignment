@@ -4,26 +4,42 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign In</title>
-    <link rel="stylesheet" href="styles/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./styles/styles.css" />
   </head>
   <body>
     <main>
-      <form id="form-signin" action="">
+      <form id="form-signin" novalidate action="">
         <h1>SIGN IN</h1>
+
+        <p id="main-error-signin" class="main-error"></p>
+
         <label for="email-signin">Email ID</label>
+        <p id="email-error-signin" class="error"></p>
         <input
           type="email"
           id="email-signin"
           placeholder="Enter your email id"
           required
         />
+
         <label for="password-signin">Password</label>
-        <input
-          type="password"
-          id="password-signin"
-          placeholder="Enter your password"
-          required
-        />
+        <p id="password-error-signin" class="error"></p>
+        <div id="password-input-wrapper-signin">
+          <input
+            type="password"
+            id="password-signin"
+            placeholder="Enter your password"
+            required
+          />
+          <button type="button" id="password-show-signin" class="password-show">
+            <i class="fa-solid fa-eye"></i>
+          </button>
+        </div>
+
         <button type="submit">Submit</button>
 
         <p class="auth-switch">
